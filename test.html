@@ -32,7 +32,7 @@
 			{
 				l = false;
 			}
-		}	
+		}
 
 
 	var canvas, engine, scene, camera;
@@ -64,9 +64,9 @@
 					newMeshes[i].parent = robotMain;
 				}
 			});
-  	
+
   	var mat2 = new BABYLON.StandardMaterial("mat2",scene);
-  	mat2.diffuseTexture = new BABYLON.Texture("fire.jpg",scene);			
+  	mat2.diffuseTexture = new BABYLON.Texture("fire.jpg",scene);
 
 	var box = function() {
     var minZ = camera.position.z+500;
@@ -91,9 +91,9 @@
     b.position.z = randomZ;
 
     b.material = mat2;
-     
-    };		
-     
+
+    };
+
 
 
 	camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -15), scene);
@@ -117,7 +117,7 @@
 	var light = new BABYLON.HemisphericLight("hlight", new BABYLON.Vector3(0,8,0),scene);
 
 	ground = new BABYLON.Mesh.CreateGround("ground",1000,1000,1,scene);
-	ground.material = mat;	
+	ground.material = mat;
 
 	scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
 	scene.fogDensity = 0.005;
@@ -138,7 +138,7 @@
    		Bonus.position.z = randomNumber(minZ, maxZ);
  };
 
-
+//tes
 
 var randomNumber = function (min, max) {
      if (min == max) {
@@ -154,7 +154,7 @@ var randomNumber = function (min, max) {
 
 
 	engine.runRenderLoop(function(){
-		robotMain.position.z += 4;	
+		robotMain.position.z += 4;
 		camera.position.z += 4;
 
 		if(r == true)
