@@ -2,12 +2,14 @@
 <html, lang ="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Week 1</title>
+	<title>Final Project</title>
 	<script type="text/javascript" src="babylon.custom.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 <canvas id="renderCanvas"></canvas>
+<div id="scoreLabel">Score : 0</div>
+
 	<script>
 	let r = false;
 	let l = false;
@@ -46,10 +48,10 @@
 	//create scene
 	scene = new BABYLON.Scene(engine);
 
-	gravity = new BABYLON.Vector3(0,-9.81,0);
-	physicsEngine = new BABYLON.CannonJSPlugin();
+	// gravity = new BABYLON.Vector3(0,-9.81,0);
+	// physicsEngine = new BABYLON.CannonJSPlugin();
 
-	scene.enablePhysics(gravity, physicsEngine);
+	// scene.enablePhysics(gravity, physicsEngine);
 
 	var robotMain;
 
@@ -64,10 +66,13 @@
 				{
 					newMeshes[i].parent = robotMain;
 				}
+
 			});
 
+
+
 	var mat2 = new BABYLON.StandardMaterial("material2",scene);
-  	mat2.diffuseTexture = new BABYLON.Texture("fire.jpg",scene);			
+  	mat2.diffuseTexture = new BABYLON.Texture("fire.jpg",scene);
 
 	var box = function() {
     var minZ = camera.position.z+500;
@@ -113,7 +118,7 @@
 	mat.ambientColor = new BABYLON.Color3(0.23,0.90,0.53);
 	//transparency
 	mat.alpha = 1;
-	
+
 
 	//create light
 	var light = new BABYLON.HemisphericLight("hlight", new BABYLON.Vector3(0,8,0),scene);
@@ -134,7 +139,30 @@
    		Bonus.position.y = 2.5;
    		Bonus.position.z = randomNumber(minZ, maxZ);
 
+			Bonus.actionManager = new BABYLON.ActionManager(scene);
+
+			var addScore = new BABYLON.IncrementValueAction(BABYLON.ActionManager.NothingTrigger, robotMain, "score", 50);
+
+			var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
+
+			Bonus.actionManager.registerAction(addScore);
+
  	};
+
+// 	robotMain.sendEvent = function(){
+// 		var e = new Event('scoreUpdated');
+// 		window.dispatchEvent(e);
+// 	};
+//
+// 	robotMain._initLabelUpdate = function(){
+// 		var updateScore = function(){
+// 			document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.score;
+// 		};
+// 		BABYLON.Tools.RegisterTopRootEvents([{
+// 		name:"scoreUpdated",
+// 		handler : updateScore
+// }]);
+// };
 
  	scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
  	scene.fogDensity = 0.005;
