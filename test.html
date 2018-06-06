@@ -164,15 +164,15 @@ var randomNumber = function (min, max) {
  }
 
  setInterval(box, 100);
- setInterval(Bonus, 1000);
+ setInterval(Bonus, 500);
 
 
 
 	engine.runRenderLoop(function(){
 		document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.Score;
 		if (! robotMain.isKilled){
-		robotMain.position.z += 4;
-		camera.position.z += 4;
+		robotMain.position.z += 2;
+		camera.position.z += 2;
 
 		if(r == true)
 		{
@@ -190,6 +190,7 @@ var randomNumber = function (min, max) {
 				robotMain.position.z +=0;
 				camera.position.z += 0;
 				robotMain.dispose();
+				alert("Your score: "+robotMain.Score);
 			}
 
 		scene.render();
