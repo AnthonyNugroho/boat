@@ -98,9 +98,9 @@
     b.position.z = randomZ;
 	b.actionManager = new BABYLON.ActionManager(scene);
 
-		var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
-		var exec = new BABYLON.SwitchBooleanAction(trigger, robotMain, "isKilled");
-		b.actionManager.registerAction(exec);
+	var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
+	var exec = new BABYLON.SwitchBooleanAction(trigger, robotMain, "isKilled");
+	b.actionManager.registerAction(exec);
 
 	b.material = mat2;
      };
@@ -140,15 +140,15 @@
    		Bonus.position.y = 2.5;
    		Bonus.position.z = randomNumber(minZ, maxZ);
 
-			Bonus.actionManager = new BABYLON.ActionManager(scene);
+		Bonus.actionManager = new BABYLON.ActionManager(scene);
 
-			var addscore = new BABYLON.IncrementValueAction(BABYLON.ActionManager.NothingTrigger, robotMain, "Score", 50);
+		var addscore = new BABYLON.IncrementValueAction(BABYLON.ActionManager.NothingTrigger, robotMain, "Score", 50);
 
-			var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
+		var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
 
-			var combine = new BABYLON.CombineAction(trigger, [addscore]);
+		var combine = new BABYLON.CombineAction(trigger, [addscore]);
 
-			Bonus.actionManager.registerAction(combine);
+		Bonus.actionManager.registerAction(combine);
  	};
 
  	scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
@@ -191,6 +191,7 @@ var randomNumber = function (min, max) {
 				camera.position.z += 0;
 				robotMain.dispose();
 				alert("Your score: "+robotMain.Score);
+				return;
 			}
 
 		scene.render();
