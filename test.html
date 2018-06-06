@@ -7,8 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-
-	<div id="ammoLabel">Score : 0</div>
 <canvas id="renderCanvas"></canvas>
 <div id="scoreLabel">Score : 0</div>
 
@@ -61,6 +59,7 @@
 			robotMain.isVisible = false;
 			robotMain.position.y = 0;
 			robotMain.isKilled = false;
+			robotMain.Score = 0;
 
 			BABYLON.SceneLoader.ImportMesh("","models/Vanquish/","ship1.babylon",scene, function(newMeshes)
 			{
@@ -143,28 +142,16 @@
 
 			Bonus.actionManager = new BABYLON.ActionManager(scene);
 
-			var addScore = new BABYLON.IncrementValueAction(BABYLON.ActionManager.NothingTrigger, robotMain, "score", 50);
+			var addscore = new BABYLON.IncrementValueAction(BABYLON.ActionManager.NothingTrigger, robotMain, "Score", 50);
 
 			var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
 
-			Bonus.actionManager.registerAction(addScore);
+			var combine = new BABYLON.CombineAction(trigger, [addscore]);
 
+			Bonus.actionManager.registerAction(combine);
  	};
 
-// 	robotMain.sendEvent = function(){
-// 		var e = new Event('scoreUpdated');
-// 		window.dispatchEvent(e);
-// 	};
-//
-// 	robotMain._initLabelUpdate = function(){
-// 		var updateScore = function(){
-// 			document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.score;
-// 		};
-// 		BABYLON.Tools.RegisterTopRootEvents([{
-// 		name:"scoreUpdated",
-// 		handler : updateScore
-// }]);
-// };
+document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.score;
 
  	scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
  	scene.fogDensity = 0.005;
@@ -184,6 +171,7 @@ var randomNumber = function (min, max) {
 
 
 	engine.runRenderLoop(function(){
+		document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.Score;
 		if (! robotMain.isKilled){
 		robotMain.position.z += 4;
 		camera.position.z += 4;
