@@ -32,7 +32,7 @@
 			{
 				l = false;
 			}
-		}	
+		}
 
 
 	var canvas, engine, scene, camera;
@@ -56,6 +56,7 @@
 			robotMain = new BABYLON.Mesh.CreateBox("robotMain",1.0, scene);
 			robotMain.isVisible = false;
 			robotMain.position.y = 0;
+			robotMain.isKilled = false;
 
 			BABYLON.SceneLoader.ImportMesh("","models/Vanquish/","ship1.babylon",scene, function(newMeshes)
 			{
@@ -86,8 +87,12 @@
      b.position.x = randomX;
      b.position.y = b.scaling.y/2 ;
      b.position.z = randomZ;
-     
-     };		
+		 b.actionManager = new BABYLON.ActionManager(scene);
+
+		var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
+		var exec = new BABYLON.SwitchBooleanAction(trigger, robotMain, "isKilled");
+		b.actionManager.registerAction(exec);
+     };
 
 
 	camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -15), scene);
@@ -125,6 +130,7 @@ var randomNumber = function (min, max) {
 
 
 	engine.runRenderLoop(function(){
+		if (! robotMain.isKilled){
 		robotMain.position.z += 4;
 		camera.position.z += 4;
 
@@ -140,6 +146,12 @@ var randomNumber = function (min, max) {
 		}
 
 		ground.position = robotMain.position;
+	}	else {
+				robotMain.position.z +=0;
+				camera.position.z += 0;
+				robotMain.dispose();
+			}
+
 		scene.render();
 	});
 });
