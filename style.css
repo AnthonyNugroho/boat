@@ -47,44 +47,19 @@ a.button {
     appearance: button;
 
 	cursor: default;
-	position: absolute;
-	top:50%;
-	font-size: 50px;
+    margin: 290px;
+    font-size: 50px;
+    padding:100px;
+}
+
+p.MenuTitle{
+    font-size: 40px;
+    margin:0;
+    padding: 50px 0 0 0;
+    text-align: center;
+    color:whitesmoke
+
 }
 
 .button {border-style: inset;}
 
-.wrapper {
-    text-align: center;
-}
-
-a.button {
-    display: inline-block;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 1px 6px;
-
-    font: 13.3333px Arial;
-    text-rendering: auto;
-    text-align: center;
-    text-transform: none;
-    text-decoration: none;
-    text-indent: 0;
-    text-shadow: none;
-    letter-spacing: normal;
-    word-spacing: normal;
-    color: buttontext;
-
-    border: 2px outset buttonface;
-    border-image: initial;
-
-    background-color: buttonface;
-
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    cursor: default;
-}
-
-a.button:active {border-style: inset;}
