@@ -50,7 +50,8 @@ a.button {
     appearance: button;
 
 	cursor: default;
-    margin: 290px;
+    margin-left: 500px;
+    margin-top: 200px;
     font-size: 50px;
     padding:100px;
 }
