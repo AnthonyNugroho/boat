@@ -46,7 +46,14 @@ a.button {
     -moz-appearance: button;
     appearance: button;
 
-    cursor: default;
+	cursor: default;
+	position: absolute;
+	top:50%;
+	font-size: 50px;
 }
 
-a.button:active {border-style: inset;}
+.button {border-style: inset;}
+
+.wrapper {
+    text-align: center;
+}
