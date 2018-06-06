@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html, lang ="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Week 1</title>
+	<script type="text/javascript" src="babylon.custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<canvas id="renderCanvas"></canvas>
+	<script>
+	let r = false;
+	let l = false;
+	window.onkeydown = function(event)
+		{
+			if(event.keyCode == 39)
+			{
+				r = true;
+			}
+			if(event.keyCode == 37)
+			{
+				l = true;
+			}
+		}
+	window.onkeyup = function(event)
+		{
+			if(event.keyCode == 39)
+			{
+				r = false;
+			}
+			if(event.keyCode == 37)
+			{
+				l = false;
+			}
+		}	
+
+
+	var canvas, engine, scene, camera;
+	document.addEventListener("DOMContentLoaded",function(){
+	//get renderCanvas
+	canvas = document.getElementById("renderCanvas");
+
+	//create babylon engine
+	engine = new BABYLON.Engine(canvas,true);
+
+	//create scene
+	scene = new BABYLON.Scene(engine);
+
+	gravity = new BABYLON.Vector3(0,-9.81,0);
+	physicsEngine = new BABYLON.CannonJSPlugin();
+
+	scene.enablePhysics(gravity, physicsEngine);
+
+	var robotMain;
+
+			robotMain = new BABYLON.Mesh.CreateBox("robotMain",1.0, scene);
+			robotMain.isVisible = false;
+			robotMain.position.y = 0;
+
+			BABYLON.SceneLoader.ImportMesh("","models/Vanquish/","ship1.babylon",scene, function(newMeshes)
+			{
+				for(i = 0; i < newMeshes.length; i++)
+				{
+					newMeshes[i].parent = robotMain;
+				}
+			});
+
+	var box = function() {
+     var minZ = camera.position.z+500;
+     var maxZ = camera.position.z+1500;
+     var minX = camera.position.x - 100, maxX = camera.position.x+100;
+     var minSize = 2, maxSize = 10;
+
+     var randomX, randomZ, randomSize;
+
+     randomX = randomNumber(minX, maxX);
+     randomZ = randomNumber(minZ, maxZ);
+     randomSize = randomNumber(minSize, maxSize);
+
+     var b = BABYLON.Mesh.CreateBox("bb", randomSize, scene);
+
+     b.scaling.x = randomNumber(0.5, 1.5);
+     b.scaling.y = randomNumber(4, 8);
+     b.scaling.z = randomNumber(2, 3);
+
+     b.position.x = randomX;
+     b.position.y = b.scaling.y/2 ;
+     b.position.z = randomZ;
+     
+     };		
+
+
+	camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -15), scene);
+	camera.speed = 4;
+
+	var mat = new BABYLON.StandardMaterial("material",scene);
+
+	mat.diffuseColor = new BABYLON.Color3(0,0,255);
+	mat.specularColor = new BABYLON.Color3(0,1,0);
+
+	mat.specularPower = 25;
+	//mat.emissiveColor = new BABYLON.Color3(0.2,0.2,0.2);
+	mat.ambientColor = new BABYLON.Color3(0.23,0.90,0.53);
+	//transparency
+	mat.alpha = 1;
+
+	//create light
+	var light = new BABYLON.HemisphericLight("hlight", new BABYLON.Vector3(0,8,0),scene);
+
+	ground = new BABYLON.Mesh.CreateGround("ground",1000,1000,1,scene);
+	ground.material = mat;
+
+
+var randomNumber = function (min, max) {
+     if (min == max) {
+         return (min);
+     }
+     var random = Math.random();
+     return ((random * (max - min)) + min);
+ }
+
+ setInterval(box, 100);
+ // setInterval(ammoB, 1000);
+
+
+
+	engine.runRenderLoop(function(){
+		robotMain.position.z += 4;
+		camera.position.z += 4;
+
+		if(r == true)
+		{
+			robotMain.position.x += 1;
+			camera.position.x += 1;
+		}
+		if(l == true)
+		{
+			robotMain.position.x -= 1;
+			camera.position.x -= 1;
+		}
+
+		ground.position = robotMain.position;
+		scene.render();
+	});
+});
+</script>
+</body>
+</html>
