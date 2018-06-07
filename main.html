@@ -48,10 +48,6 @@
 	//create scene
 	scene = new BABYLON.Scene(engine);
 
-	// gravity = new BABYLON.Vector3(0,-9.81,0);
-	// physicsEngine = new BABYLON.CannonJSPlugin();
-
-	// scene.enablePhysics(gravity, physicsEngine);
 
 	var robotMain;
 
@@ -115,7 +111,6 @@
 	mat.specularColor = new BABYLON.Color3(0,1,0);
 
 	mat.specularPower = 25;
-	//mat.emissiveColor = new BABYLON.Color3(0.2,0.2,0.2);
 	mat.ambientColor = new BABYLON.Color3(0.23,0.90,0.53);
 	//transparency
 	mat.alpha = 1;
@@ -171,8 +166,8 @@ var randomNumber = function (min, max) {
 	engine.runRenderLoop(function(){
 		document.getElementById("scoreLabel").innerHTML = "Score: "+ robotMain.Score;
 		if (! robotMain.isKilled){
-		robotMain.position.z += 2;
-		camera.position.z += 2;
+		robotMain.position.z += 1.5;
+		camera.position.z += 1.5;
 
 		if(r == true)
 		{
