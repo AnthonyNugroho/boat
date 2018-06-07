@@ -79,15 +79,21 @@ var box = function() {
   b.position.x = randomX;
   b.position.y = b.scaling.y/2 ;
   b.position.z = randomZ;
-b.actionManager = new BABYLON.ActionManager(scene);
+  b.actionManager = new BABYLON.ActionManager(scene);
 
-var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
+
+
+var trigger= {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
 var exec = new BABYLON.SwitchBooleanAction(trigger, robotMain, "isKilled");
 
 b.actionManager.registerAction(exec);
 
 b.material = mat2;
    };
+
+   var explosion = function(){
+     var explosion = new BABYLON.Sound("explosion", "Explosion+3.wav", scene, null, {loop: false, autoplay: true});
+   }
 
 
 camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -15), scene);
@@ -112,7 +118,7 @@ ground.material = mat;
 
 var Bonus = function() {
     var Bonus = BABYLON.Mesh.CreateSphere("sphere", 20, 5, scene);
-    Bonus.material = new BABYLON.StandardMaterial("bonusMat", scene);
+    Bonus.material = new BABYLON.StandardMaterial("material3", scene);
     Bonus.material.diffuseColor = BABYLON.Color3.Green();
 
     var minZ = camera.position.z+500;
@@ -185,6 +191,7 @@ engine.runRenderLoop(function(){
 
   ground.position = robotMain.position;
 }	else {
+      explosion();
       robotMain.position.z +=0;
       camera.position.z += 0;
       robotMain.dispose();
