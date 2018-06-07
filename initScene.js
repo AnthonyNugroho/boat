@@ -83,6 +83,7 @@ b.actionManager = new BABYLON.ActionManager(scene);
 
 var trigger = {trigger:BABYLON.ActionManager.OnIntersectionEnterTrigger, parameter: robotMain};
 var exec = new BABYLON.SwitchBooleanAction(trigger, robotMain, "isKilled");
+
 b.actionManager.registerAction(exec);
 
 b.material = mat2;
