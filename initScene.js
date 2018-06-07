@@ -43,6 +43,7 @@ var robotMain;
     robotMain.position.y = 0;
     robotMain.isKilled = false;
     robotMain.Score = 0;
+    robotMain.rotation.y = (Math.PI);
 
     BABYLON.SceneLoader.ImportMesh("","models/Vanquish/","ship1.babylon",scene, function(newMeshes)
     {
@@ -89,7 +90,7 @@ b.material = mat2;
    };
 
 
-camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -15), scene);
+camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0, 3, -10), scene);
 camera.speed = 4;
 
 var mat = new BABYLON.StandardMaterial("material",scene);
@@ -167,8 +168,8 @@ engine.runRenderLoop(function(){
   }
   else if(robotMain.Score >= 1000)
   {
-    robotMain.position.z += 5;
-    camera.position.z += 5;
+    robotMain.position.z += 4;
+    camera.position.z += 4;
   }
 
   if(r == true)
