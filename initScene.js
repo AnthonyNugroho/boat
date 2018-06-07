@@ -155,6 +155,21 @@ engine.runRenderLoop(function(){
   if (! robotMain.isKilled){
   robotMain.position.z += 1.5;
   camera.position.z += 1.5;
+  if(robotMain.Score >= 300)
+  {
+    robotMain.position.z += 2.5;
+    camera.position.z += 2.5;
+  }
+  else if(robotMain.Score >= 600)
+  {
+    robotMain.position.z += 3.5;
+    camera.position.z += 3.5;
+  }
+  else if(robotMain.Score >= 1000)
+  {
+    robotMain.position.z += 5;
+    camera.position.z += 5;
+  }
 
   if(r == true)
   {
